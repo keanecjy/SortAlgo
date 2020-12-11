@@ -7,11 +7,11 @@ const Team = () => {
   const picture = (img, description) => (
     <div className="inner">
       <div className="item">
-      <Hexagon
-        className="picture"
-        style={{ stroke: '#3558CB', strokeWidth: 4 }}
-        backgroundImage={img}
-      />
+        <Hexagon
+          className="picture"
+          style={{ stroke: '#3558CB', strokeWidth: 4 }}
+          backgroundImage={img}
+        />
       </div>
       <p>{description}</p>
     </div>

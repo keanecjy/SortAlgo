@@ -36,7 +36,7 @@ const Visualizer = () => {
     <>
       <div className="visualizer">
         <div className="visualizer-header-box">
-          <SectionHeader name={"Visualizer"} />
+          <SectionHeader name={'Visualizer'} />
           <AlgorithmSelector setVisualizerAlgorithm={(algo) => setAlgorithm(algo)} />
         </div>
         <div className="visualizer-box">
