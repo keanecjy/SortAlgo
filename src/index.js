@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './app/App';
-import reportWebVitals from './app/reportWebVitals';
+import reportWebVitals from './reportWebVitals';
 
 // listener to show current navigation window/menu
 window.addEventListener('scroll', (event) => {
