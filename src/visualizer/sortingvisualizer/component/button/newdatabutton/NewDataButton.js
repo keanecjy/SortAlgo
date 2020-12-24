@@ -1,7 +1,9 @@
 import React, { useContext } from 'react';
 import './styles.css';
 import { VisualizerStateContext } from '../../../Visualizer';
-import { arrayCopy, buckets, generateArray } from '../../../util/VisualizerUtil';
+import { arrayCopy, generateArray } from '../../../util/GeneralUtil';
+import { buckets } from '../../../util/CountingSortUtil';
+import { stack } from '../../../util/RadixSortUtil';
 
 const NewDataButton = () => {
   const {
@@ -13,7 +15,9 @@ const NewDataButton = () => {
     setAnimationPercentage,
     visualizerAlgorithm,
     setCountArr,
+    setStackArr,
     setIsReset,
+    setHistoryArr,
   } = useContext(VisualizerStateContext);
 
   const handleNewDataButtonClick = () => {
@@ -23,6 +27,8 @@ const NewDataButton = () => {
       setAnimationPercentage(0);
       setIsReplay(false);
       setCountArr(arrayCopy(buckets));
+      setStackArr(arrayCopy(stack));
+      setHistoryArr([]);
       setIsReset(true);
     }
   };

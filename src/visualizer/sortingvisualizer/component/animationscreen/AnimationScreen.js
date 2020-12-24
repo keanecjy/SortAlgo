@@ -1,12 +1,20 @@
 import React, { useContext, useEffect } from 'react';
 import { useTransition } from 'react-spring';
-import AnimatedBlock from '../block/AnimatedBlock';
 import './styles.css';
 import { VisualizerStateContext } from '../../Visualizer';
-import { arrayCopy, isBucketTypeSort } from '../../util/VisualizerUtil';
-import SmallBlock from '../smallBlock/SmallBlock';
-import Buckets from '../bucketsortingvisualizer/Buckets';
-import MergeSortBlock from '../block/MergeSortBlock';
+import {
+  arrayCopy,
+  isBucketSort,
+  isCountingSort,
+  isMergeSort,
+  isRadixSort,
+} from '../../util/GeneralUtil';
+import { animationSpeedArray, mergeSortAnimationSpeedArray } from '../../util/AnimationScreenUtil';
+import CountingSortScreen from './CountingSortScreen';
+import RadixSortScreen from './RadixSortScreen';
+import BucketSortScreen from './BucketSortScreen';
+import MergeSortScreen from './MergeSortScreen';
+import GenericSortScreen from './GenericSortScreen';
 
 const AnimationScreen = () => {
   const {
@@ -19,7 +27,7 @@ const AnimationScreen = () => {
     speed,
     setIdx,
     setReferenceArray,
-    executeForwardSwapAnimation,
+    executeForwardAnimation,
     resetDataWhenAnimationFinish,
     dataSize,
     visualizerAlgorithm,
@@ -48,9 +56,12 @@ const AnimationScreen = () => {
    */
   useEffect(() => {
     if (!isReplay && isPlay && idx < animationArr.length) {
+      let timeOutDuration = isMergeSort(visualizerAlgorithm)
+        ? mergeSortAnimationSpeedArray[speed - 1]
+        : animationSpeedArray[speed - 1];
       setTimeout(() => {
-        executeForwardSwapAnimation();
-      }, 800 / speed);
+        executeForwardAnimation();
+      }, timeOutDuration);
     } else if (!isReplay && isPlay) {
       resetDataWhenAnimationFinish(referenceArray);
     }
@@ -58,7 +69,7 @@ const AnimationScreen = () => {
 
   const transitions = useTransition(
     referenceArray.map((data) => {
-      if (visualizerAlgorithm === 'Merge Sort') {
+      if (isMergeSort(visualizerAlgorithm)) {
         return { ...data, x: parseInt(data.xDirection) };
       }
       return { ...data, x: (xDirection += 10) - 10 };
@@ -72,68 +83,16 @@ const AnimationScreen = () => {
     }
   );
 
-  if (isBucketTypeSort(visualizerAlgorithm)) {
-    return (
-      <div className="container-one">
-        <div className="list">
-          {transitions.map(({ item, props: { x, ...rest } }, index) => {
-            return (
-              <SmallBlock
-                item={item}
-                props={{ x, ...rest }}
-                index={index}
-                length={length}
-                key={index}
-                width={800 / dataSize}
-              />
-            );
-          })}
-        </div>
-        <Buckets />
-      </div>
-    );
-  } else if (visualizerAlgorithm === 'Merge Sort') {
-    return (
-      <div className="container-one">
-        <div className="list">
-          {transitions.map(({ item, props: { x, ...rest } }, index) => {
-            return (
-              <MergeSortBlock
-                item={item}
-                props={{ x, ...rest }}
-                index={index}
-                length={length}
-                key={index}
-                isSwap={item.isSwap}
-                isShift={item.isShift}
-                width={800 / dataSize}
-                pos={item.pos}
-                prevPos={item.prevPos}
-              />
-            );
-          })}
-        </div>
-        <Buckets />
-      </div>
-    );
+  if (isCountingSort(visualizerAlgorithm)) {
+    return <CountingSortScreen transitions={transitions} dataSize={dataSize} length={length} />;
+  } else if (isRadixSort(visualizerAlgorithm)) {
+    return <RadixSortScreen />;
+  } else if (isBucketSort(visualizerAlgorithm)) {
+    return <BucketSortScreen />;
+  } else if (isMergeSort(visualizerAlgorithm)) {
+    return <MergeSortScreen transitions={transitions} dataSize={dataSize} length={length} />;
   } else {
-    return (
-      <div className="list">
-        {transitions.map(({ item, props: { x, ...rest } }, index) => {
-          return (
-            <AnimatedBlock
-              item={item}
-              props={{ x, ...rest }}
-              index={index}
-              length={length}
-              key={index}
-              isSwap={item.isSwap}
-              width={800 / dataSize}
-            />
-          );
-        })}
-      </div>
-    );
+    return <GenericSortScreen transitions={transitions} dataSize={dataSize} length={length} />;
   }
 };
 

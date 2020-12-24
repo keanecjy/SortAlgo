@@ -144,9 +144,10 @@ textarea:focus {
 }
 
 .form-submit-button-box {
+  align-items: center;
   display: flex;
+  flex-direction: column;
   height: 60px;
-  justify-content: center;
   width: 100vw;
 }
 
@@ -168,4 +169,19 @@ textarea:focus {
   color: white;
   font-family: 'Nunito', sans-serif;
   font-weight: bolder;
+}
+
+.message-acknowledgement {
+  background-color: #5467ff;
+  float: left;
+  height: 50px;
+  width: 200px;
+}
+
+.close-notification-button {
+  border-radius: 100%;
+}
+
+.close-notification-button:hover {
+  background-color: rgba(255, 255, 255, 0.2);
 }

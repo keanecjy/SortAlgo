@@ -4,16 +4,16 @@
 }
 
 .main header {
-  color: #32325D;
+  color: #32325d;
   font-family: 'Open Sans Semibold', sans-serif;
   font-size: 18px;
   margin-bottom: 10px;
 }
 
 .main p {
-  color: #8789B5;
+  color: #8789b5;
   font-size: 16px;
-  margin-bottom: 2em;
+  margin-bottom: 1.5em;
 }
 
 .explanation-para {
@@ -48,8 +48,8 @@
 }
 
 .complexity p {
-  background-color: #5467FF;
-  border: 5px solid #5467FF;
+  background-color: #5467ff;
+  border: 5px solid #5467ff;
   border-radius: 20px;
   color: #f2f2f2;
   font-family: 'Open Sans Semibold', sans-serif;
@@ -67,4 +67,11 @@
 .row-container-two div {
   min-width: 100px;
   text-align: center;
+}
+
+.link, .link:focus {
+  margin-top: 6%;
+  color: steelblue;
+  text-decoration: underline;
+  font-size: 15px;
 }
