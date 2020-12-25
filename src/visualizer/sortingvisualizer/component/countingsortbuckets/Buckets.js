@@ -4,9 +4,19 @@ import './styles.css';
 import { VisualizerStateContext } from '../../Visualizer';
 import { translateXOfVisualizer } from '../../util/GeneralUtil';
 
+/**
+ * Buckets used for counting sort.
+ *
+ * @returns {JSX.Element} Display of buckets used for counting sort.
+ */
 const Buckets = () => {
   const { dataSize, countArr } = useContext(VisualizerStateContext);
 
+  /**
+   * Color array used to display the count of the block in counting sort.
+   *
+   * @type {string[]} String color array.
+   */
   const colorArr = [
     '#B8B8B8',
     '#b4d3de',
@@ -42,7 +52,6 @@ const Buckets = () => {
     >
       <div
         className="animated-block"
-        key={item.height}
         style={{
           height: item.height * 10 + 9,
           backgroundColor: colorArr[item.count],
@@ -57,8 +66,8 @@ const Buckets = () => {
 
   return (
     <div className="fixed-array">
-      {countArr.map((item) => (
-        <CountingBlock item={item} />
+      {countArr.map((item, index) => (
+        <CountingBlock item={item} key={index}/>
       ))}
     </div>
   );
