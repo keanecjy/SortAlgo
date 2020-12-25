@@ -4,7 +4,7 @@ import explanations from '../explanations/Explanations';
 import { FaCheckCircle, FaTimesCircle } from 'react-icons/fa';
 
 const CodeExplanation = ({ algo }) => {
-  const [sort, setSort] = useState(explanations[algo]);
+  const [sort, setSort] = useState(() => explanations[algo]);
 
   useEffect(() => {
     setSort(explanations[algo]);

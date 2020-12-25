@@ -50,13 +50,23 @@ const Visualizer = () => {
   const [speed, setSpeed] = useState(5);
   const [dataSize, setDataSize] = useState(15);
   const [visualizerAlgorithm, setVisualizerAlgorithm] = useState('Bubble Sort');
-  const [arrayData, setArrayData] = useState(generateArray(dataSize, visualizerAlgorithm));
-  const [referenceArray, setReferenceArray] = useState(arrayCopy(arrayData));
-  const [animationArr, setAnimationArr] = useState(bubbleSort(arrayCopy(arrayData)));
+  const [arrayData, setArrayData] = useState(() => generateArray(dataSize, visualizerAlgorithm));
+  const [referenceArray, setReferenceArray] = useState(() => arrayCopy(arrayData));
+  const [animationArr, setAnimationArr] = useState(() => bubbleSort(arrayCopy(arrayData)));
   const [animationPercentage, setAnimationPercentage] = useState(0);
   const [idx, setIdx] = useState(0);
-  const [countArr, setCountArr] = useState(arrayCopy(buckets));
-  const [stackArr, setStackArr] = useState(arrayCopy(stack));
+  const [countArr, setCountArr] = useState(() => arrayCopy(buckets));
+  const [stackArr, setStackArr] = useState(() => arrayCopy(stack));
+  const [stack1, setStack1] = useState([]);
+  const [stack2, setStack2] = useState([]);
+  const [stack3, setStack3] = useState([]);
+  const [stack4, setStack4] = useState([]);
+  const [stack5, setStack5] = useState([]);
+  const [stack6, setStack6] = useState([]);
+  const [stack7, setStack7] = useState([]);
+  const [stack8, setStack8] = useState([]);
+  const [stack9, setStack9] = useState([]);
+  const [stack10, setStack10] = useState([]);
 
   // This is introduced to simplify the back animation for MergeSort
   const [historyArr, setHistoryArr] = useState([]);
@@ -140,7 +150,7 @@ const Visualizer = () => {
     } else if (isRadixSort(visualizerAlgorithm)) {
       executeRadixSort(currentAnimation, referenceArray, stackArr, false);
     } else if (isBucketSort(visualizerAlgorithm)) {
-      executeBucketSort(currentAnimation, referenceArray, stackArr, false);
+      executeBucketSort(currentAnimation, referenceArray, stackArr, false, setStackArr);
     } else if (isMergeSort(visualizerAlgorithm)) {
       executeMergeSortBackward(historyArr, setReferenceArray);
     } else if (isQuickSort(visualizerAlgorithm)) {

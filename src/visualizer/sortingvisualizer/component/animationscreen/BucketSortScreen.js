@@ -61,12 +61,15 @@ const BucketSortScreen = () => {
   };
 
   const StackOfBoxes = ({ individualStack }) => {
+
+    const temp = Transitions(individualStack.array).map(({ item, props: { y, ...rest } }, index) => (
+      <AnimatedBox item={item} props={{ y, ...rest }} key={index} />
+    ));
+
     return (
       <div className="stack">
         <div className="stack-boxes">
-          {Transitions(individualStack.array).map(({ item, props: { y, ...rest } }, index) => (
-            <AnimatedBox item={item} props={{ y, ...rest }} key={index} />
-          ))}
+          {temp}
         </div>
         <div className="number-with-line">{individualStack.value}</div>
       </div>

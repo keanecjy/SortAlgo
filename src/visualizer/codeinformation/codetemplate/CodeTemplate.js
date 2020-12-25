@@ -10,7 +10,7 @@ import 'ace-builds/src-noconflict/mode-javascript';
 import 'ace-builds/src-noconflict/theme-textmate';
 
 const CodeTemplate = ({ algo }) => {
-  const [template, setTemplate] = useState(templates[algo]);
+  const [template, setTemplate] = useState(() => templates[algo]);
   const [selected, setSelected] = useState('Java');
 
   useEffect(() => {
