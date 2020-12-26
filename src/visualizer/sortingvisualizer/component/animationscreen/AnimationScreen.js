@@ -9,13 +9,15 @@ import {
   isMergeSort,
   isRadixSort,
 } from '../../util/GeneralUtil';
-import { animationSpeedArray, mergeSortAnimationSpeedArray } from '../../util/AnimationScreenUtil';
 import CountingSortScreen from './CountingSortScreen';
 import RadixSortScreen from './RadixSortScreen';
 import BucketSortScreen from './BucketSortScreen';
 import MergeSortScreen from './MergeSortScreen';
 import GenericSortScreen from './GenericSortScreen';
 
+/**
+ * The screen which shows the animation for the sorting visualizer.
+ */
 const AnimationScreen = () => {
   const {
     isPlay,
@@ -34,8 +36,7 @@ const AnimationScreen = () => {
     isReset,
     setIsReset,
   } = useContext(VisualizerStateContext);
-
-  const length = referenceArray.length;
+  const animationSpeedArray = [1000, 800, 600, 500, 400, 320, 260, 200, 160, 120];
   let xDirection = 0;
 
   useEffect(() => {
@@ -56,12 +57,9 @@ const AnimationScreen = () => {
    */
   useEffect(() => {
     if (!isReplay && isPlay && idx < animationArr.length) {
-      let timeOutDuration = isMergeSort(visualizerAlgorithm)
-        ? mergeSortAnimationSpeedArray[speed - 1]
-        : animationSpeedArray[speed - 1];
       setTimeout(() => {
         executeForwardAnimation();
-      }, timeOutDuration);
+      }, animationSpeedArray[speed - 1]);
     } else if (!isReplay && isPlay) {
       resetDataWhenAnimationFinish(referenceArray);
     }
@@ -83,16 +81,21 @@ const AnimationScreen = () => {
     }
   );
 
+  const dataItem = {
+    transitions: transitions,
+    dataSize: dataSize,
+  };
+
   if (isCountingSort(visualizerAlgorithm)) {
-    return <CountingSortScreen transitions={transitions} dataSize={dataSize} length={length} />;
+    return <CountingSortScreen {...dataItem} />;
   } else if (isRadixSort(visualizerAlgorithm)) {
     return <RadixSortScreen />;
   } else if (isBucketSort(visualizerAlgorithm)) {
     return <BucketSortScreen />;
   } else if (isMergeSort(visualizerAlgorithm)) {
-    return <MergeSortScreen transitions={transitions} dataSize={dataSize} length={length} />;
+    return <MergeSortScreen {...dataItem} />;
   } else {
-    return <GenericSortScreen transitions={transitions} dataSize={dataSize} length={length} />;
+    return <GenericSortScreen {...dataItem} />;
   }
 };
 
