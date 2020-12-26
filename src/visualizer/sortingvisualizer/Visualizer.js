@@ -57,16 +57,6 @@ const Visualizer = () => {
   const [idx, setIdx] = useState(0);
   const [countArr, setCountArr] = useState(() => arrayCopy(buckets));
   const [stackArr, setStackArr] = useState(() => arrayCopy(stack));
-  const [stack1, setStack1] = useState([]);
-  const [stack2, setStack2] = useState([]);
-  const [stack3, setStack3] = useState([]);
-  const [stack4, setStack4] = useState([]);
-  const [stack5, setStack5] = useState([]);
-  const [stack6, setStack6] = useState([]);
-  const [stack7, setStack7] = useState([]);
-  const [stack8, setStack8] = useState([]);
-  const [stack9, setStack9] = useState([]);
-  const [stack10, setStack10] = useState([]);
 
   // This is introduced to simplify the back animation for MergeSort
   const [historyArr, setHistoryArr] = useState([]);
